@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>端口扫描器</title>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="static/qglogo.png" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="./index.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js
+	"></script>
+</head>
+
+<body>
+	<div id="app">
+		<div class="title">
+			<svg>
+				<clipPath id="cp-text">
+					<text text-anchor="middle" x="50%" y="50%" dy=".35em" class="text-line">端口扫描器</text>
+				</clipPath>
+				<g clip-path="url(#cp-text)" class="shadow">
+					<rect width="100%" height="100%" class="anim-shape anim-shape--shadow"></rect>
+				</g>
+				<g clip-path="url(#cp-text)" class="colortext">
+					<rect width="100%" height="100%" fill="#0E1826" class="anim-shape"></rect>
+					<rect width="80%" height="100%" fill="#166973" class="anim-shape"></rect>
+					<rect width="60%" height="100%" fill="#65BFA6" class="anim-shape"></rect>
+					<rect width="40%" height="100%" fill="#F2CD5C" class="anim-shape"></rect>
+					<rect width="20%" height="100%" fill="#F26444" class="anim-shape"></rect>
+				</g>
+			</svg>
+		</div>
+		<div class="center">
+			<div class="scan_way">
+				<div :class="{select: type == 0}" @click='changeType(0)'>全端口扫描</div>
+				<div :class="{select: type == 1}" @click='changeType(1)'>指定区间扫描</div>
+				<div :class="{select: type == 2}" @click='changeType(2)'>指定端口扫描</div>
+			</div>
+			<div class="send_data">
+				<div class="host item">
+					<span style="width: 8em">ip地址/域名</span>
+					<input style="width: 100%" v-model='host' type="text" placeholder="例：127.0.0.1">
+				</div>
+				<div class="port">
+					<div v-show='type==0' class="port1 item">
+						<span style="width: 8em">端口号</span>
+						<input style="width: 45%" type="text" v-model='start' disabled>
+						<strong style="width: 10%;text-align: center;">——</strong>
+						<input style="width: 45%" type="text" v-model='end' disabled>
+					</div>
+					<div v-show='type==1' class="port2 item">
+						<span style="width: 8em">端口号</span>
+						<input style="width: 45%" type="text" v-model='start'>
+						<strong style="width: 10%;text-align: center;">——</strong>
+						<input style="width: 45%" type="text" v-model='end'>
+					</div>
+					<div v-show='type==2' class="port3 item">
+						<span style="width: 8em">端口号</span>
+						<input style="width: 100%" type="text" v-model='start'>
+					</div>
+				</div>
+
+			</div>
+			<div class="history" v-show='history'>
+				<span class="item">扫描历史</span>
+				<div class="dataCon">
+					<span class="host" v-for="(item, index) in history" :key="index" @click="host=item">{{item}}</span>
+				</div>
+				<div class="delAll" @click='delHistroy'></div>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="sure" @click="sure">
+				<span v-show="!loading">确定</span>
+				<div v-show="loading" class="loading"></div>
+			</div>
+			<div class="result" v-if='result'>
+				<div v-if="type!=2" class="qujian">
+					<div class="totol">
+						<span>扫描完毕，{{result.host}}开放端口数为：</span>
+						<div>{{result.openPort.length}}</div>
+					</div>
+					<div class="item" v-show='result.openPort.length'>
+						<span class="port">端口</span>
+						<!-- <span class="type">类型</span> -->
+						<span class="server_name">服务</span>
+						<span class="ifOpen">开放状态</span>
+						<span class="info">描述</span>
+					</div>
+					<div class="list" v-for="(item, index) in result.openPort" :key="index">
+						<span class="port">{{item.port}}</span>
+						<!-- <span class="type">{{item.data.type}}</span> -->
+						<span class="server_name">{{item.data.server_name}}</span>
+						
+						<span class="ifOpen" style="color: #166973;font-weight: bold;">开放</span>
+						<span class="info">{{item.data.info}}</span>
+					</div>
+				</div>
+				<div v-else class="one">
+					<div class="item" >
+						<span class="port">端口</span>
+						<span class="server_name">服务</span>
+						<span class="ifOpen">开放状态</span>
+						<span class="info">描述</span>
+					</div>
+					<div class="list" >
+						<span class="port">{{result.openPort.port}}</span>
+						<span class="server_name">{{result.openPort.data.server_name}}</span>
+						<span v-show='result.openPort.ifOpen' class="ifOpen" style="color: #166973">开放</span>
+						<span v-show='!result.openPort.ifOpen' class="ifOpen" style="color: #F26444">关闭</span>
+						<span class="info">{{result.openPort.data.info}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="./index.js"></script>
+
+</html>

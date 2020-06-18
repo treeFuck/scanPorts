@@ -1,0 +1,246 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+@font-face {
+	font-family: 'test';  
+	src: url('./static/test.ttf');
+}
+
+#app {
+	margin: 0 auto;
+	width: 90vw;
+	min-width: 40em;
+}
+/*标题*/
+.title {
+    display: flex;
+    justify-content: center;
+	font-family: 'test';
+}
+
+.title svg {
+    height: 1.5em;
+    width: 11em;
+    font-size: 80px;
+}
+
+.title .text-line {
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+
+.title .anim-shape {
+    transform: translate(0, 0);
+    animation: moving-panel 1s ease-in-out infinite alternate;
+}
+
+.title .shadow {
+  transform: translate(0.07em, 0.07em);
+}
+
+.title .anim-shape--shadow {
+  fill: #000;
+  fill-opacity: 0.2;
+}
+
+@keyframes moving-panel {
+    0% {
+        transform: translate(-1.1em, 0);
+    }
+    100% {
+        transform: translate(1.1em, 0);
+    }
+}
+
+
+
+/*中间：扫描选择、ip和端口的输入、历史记录*/
+.center {
+	
+}
+
+.scan_way {
+	display: flex;
+	justify-content: space-between;
+}
+
+.scan_way div {
+	margin: 1em 0;
+	height: 2em;
+	width: 8em;
+	line-height: 2em;
+	font-size: 1.2em;
+	text-align: center;
+	cursor: pointer;
+	font-weight: bold;
+	transition: color 0.3s;
+}
+
+.scan_way .select {
+	color: #65BFA6;
+	border-bottom: 0.2em solid #65BFA6;
+}
+
+.send_data span {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+.send_data input {
+	display: inline-block;
+	text-align: center;
+	background: none;
+	border: none;
+	outline: none;
+	font-weight: bold;
+	font-size: 1.3em;
+	border-bottom: 1px solid #000;
+}
+
+.send_data .item {
+	display: flex;
+	justify-content: space-between;
+	margin: 2em 0;
+}
+
+.history {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 2em 0;
+}
+.history .item {
+	width: 8em;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+.history .dataCon  {
+	width: 100%;
+	text-align: left;
+}
+.history .dataCon span {
+	display: inline-block;
+	margin: 0.5em;
+	padding: 0.5em 1em;
+	background-color: #eee;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.history .delAll {
+	width: 2em;
+	height: 2em;
+	cursor: pointer;
+	background-image: url(./static/del.png);
+	background-position: center ;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+}
+
+
+/*底部，确定按钮、扫描结果*/
+.bottom {
+
+}
+.bottom .sure {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 3em 0 1em 0;
+	width: 100%;
+	height: 3em;
+	cursor: pointer;
+	background-color: #65BFA6;
+	border-radius: 5px;
+} 
+.sure span {
+	color: #000;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.sure .loading{
+	display: inline-block;
+	margin: 0 auto;
+    width: 1.5em;
+	height: 1.5em;
+	border: 4px #65BFA6 solid;
+	border-left-color: #F2CD5C;
+	border-right-color:#F26444;
+	border-radius: 100%;
+	animation: loading 1s infinite;
+}
+
+@keyframes loading{
+    from{transform: rotate(0deg)}to{transform: rotate(360deg)}
+}
+
+/*扫描结果*/
+.result {
+	/* width: 100vw; */
+	margin-bottom: 2em;
+	padding: 1em 0;
+	text-align: center;
+	border-bottom: 2px solid #166973;
+	border-radius: 20px;
+}
+
+.qujian .totol{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1em 0;
+	font-size: 1.2em;
+	line-height: 2em;
+}
+
+.qujian .totol div {
+	width: 5em;
+	color: #65BFA6;
+	font-weight: bold;
+	border-bottom: 2px solid #65BFA6;
+}
+
+.result .item,
+.result .list {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.result .item {
+	height: 3em;
+	line-height: 3em;
+	color: #F26444;
+	font-weight: bold;
+	background-color: #ccc;
+}
+.result .list {
+	margin: 0.5em 0;
+	line-height: 1.2em;
+}
+.result .item .port,
+.result .list .port{
+	width: 10%;
+}
+.result .item .server_name,
+.result .list .server_name{
+	width: 15%;
+}
+.result .item .info,
+.result .list .info{
+	width: 65%;
+	display: -webkit-box;
+	text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	cursor: pointer;
+}
+.result .list .info:hover {
+	display: inline-block;
+}
+.result .item .ifOpen,
+.result .list .ifOpen{
+	width: 10%;
+	font-weight: bold;
+}
