@@ -20,9 +20,9 @@
 
   1. 安装 [node.js](http://nodejs.cn/download/) 环境
   2. 安装服务器依赖，执行`npm install express`
-    3. 安装进度条依赖，执行`npm install progress`
-    4. 执行port_info2.sql文件里的sql语句，初始化数据库
-    5. 修改utils/mysql.js中数据库用户名、密码
-    6. 终端切换至工具所在文件夹，执行`node server.js`
-    7. 浏览器访问 http://localhost:8080
+  3. 安装进度条依赖，执行`npm install progress`
+  4. 执行port_info2.sql文件里的sql语句，初始化数据库
+  5. 修改utils/mysql.js中数据库用户名、密码
+  6. 终端切换至工具所在文件夹，执行`node server.js`
+  7. 浏览器访问 http://localhost:8080
 
